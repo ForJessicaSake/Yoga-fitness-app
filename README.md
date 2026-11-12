@@ -74,22 +74,6 @@ cp .env.example .env
 - Enable **Email/Password**
 - Enable **Google** and copy the **Web client ID** into `.env`
 
-## Environment variables
-
-| Variable | Purpose |
-| --- | --- |
-| `EXPO_PUBLIC_FIREBASE_API_KEY` | Firebase API key |
-| `EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN` | Auth domain |
-| `EXPO_PUBLIC_FIREBASE_PROJECT_ID` | Project ID |
-| `EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET` | Storage bucket |
-| `EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID` | Sender ID |
-| `EXPO_PUBLIC_FIREBASE_APP_ID` | Firebase App ID |
-| `EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID` | Web OAuth client ID (required for Google → Firebase) |
-| `EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID` | iOS OAuth client ID from `GoogleService-Info.plist` |
-| `EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID` | Android OAuth client ID (when Android Google Sign-In is set up) |
-
-Restart Metro after changing `.env` so values reload.
-
 ## Run on iOS
 
 Google Sign-In needs a **development build** (native binary). Expo Go is fine for UI and email/password only.
