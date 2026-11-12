@@ -1,16 +1,22 @@
 {
   "expo": {
-    "name": "nova",
-    "slug": "nova",
+    "name": "yofit",
+    "slug": "yofit",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "nova",
+    "scheme": [
+      "yofit",
+      "com.googleusercontent.apps.178480517678-j74fu67caol0pff07i1ibk2ppkhi1mo6"
+    ],
     "userInterfaceStyle": "automatic",
     "ios": {
+      "bundleIdentifier": "com.yofit.app",
+      "googleServicesFile": "./GoogleService-Info.plist",
       "icon": "./assets/expo.icon"
     },
     "android": {
+      "package": "com.yofit.app",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -25,6 +31,7 @@
     },
     "plugins": [
       "expo-router",
+      "@react-native-google-signin/google-signin",
       [
         "expo-splash-screen",
         {

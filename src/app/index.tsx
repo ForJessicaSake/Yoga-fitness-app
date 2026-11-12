@@ -1,98 +1,111 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { router } from "expo-router";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+export default function OverviewScreen() {
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+    <SafeAreaView style={styles.safe}>
+      <View style={styles.container}>
+        <Image
+          source={require("../../assets/images/Illustration.png")}
+          style={styles.illustration}
+          resizeMode="contain"
+        />
 
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
+        <View style={styles.copy}>
+          <Text style={styles.welcome}>welcome to</Text>
+          <Text style={styles.brand}>
+            YO<Text style={styles.brandAccent}>FIT</Text>
+          </Text>
+          <Text style={styles.tagline}>Your Personal Yoga Companion</Text>
+          <Text style={styles.body}>
+            Discover a healthier, more balanced you with YOFIT. Join our
+            community and start your journey towards wellness today.
+          </Text>
+        </View>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
+        <View style={styles.buttonRow}>
+          <Pressable
+            style={[styles.button, styles.primaryButton]}
+            onPress={() => router.push("/auth/signup")}
+          >
+            <Text style={styles.primaryText}>Get Started</Text>
+          </Pressable>
 
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+          <Pressable
+            style={[styles.button, styles.secondaryButton]}
+            onPress={() => router.push("/auth/login")}
+          >
+            <Text style={styles.secondaryText}>Log In</Text>
+          </Pressable>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safe: { flex: 1, backgroundColor: "#FFFFFF" },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    paddingHorizontal: 24,
+    paddingBottom: 24,
+    justifyContent: "space-between",
   },
-  safeArea: {
+  illustration: {
+    width: "100%",
+    height: 320,
+    alignSelf: "center",
+    marginTop: 12,
+  },
+  copy: { gap: 8 },
+  welcome: {
+    fontFamily: "PlusJakartaSans_400Regular",
+    fontSize: 28,
+    color: "#111111",
+  },
+  brand: {
+    fontFamily: "PlusJakartaSans_700Bold",
+    fontSize: 48,
+    color: "#111111",
+    lineHeight: 52,
+  },
+  brandAccent: { color: "#DEA2FF" },
+  tagline: {
+    fontFamily: "PlusJakartaSans_500Medium",
+    fontSize: 16,
+    color: "#111111",
+    marginTop: 4,
+  },
+  body: {
+    fontFamily: "PlusJakartaSans_400Regular",
+    fontSize: 14,
+    lineHeight: 20,
+    color: "#474747",
+    marginTop: 8,
+  },
+  buttonRow: { flexDirection: "row", gap: 12 },
+  button: {
     flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+    height: 52,
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+  primaryButton: { backgroundColor: "#DEA2FF" },
+  primaryText: {
+    fontFamily: "PlusJakartaSans_600SemiBold",
+    fontSize: 16,
+    color: "#FFFFFF",
   },
-  title: {
-    textAlign: 'center',
+  secondaryButton: {
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1.5,
+    borderColor: "#DEA2FF",
   },
-  code: {
-    textTransform: 'uppercase',
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+  secondaryText: {
+    fontFamily: "PlusJakartaSans_600SemiBold",
+    fontSize: 16,
+    color: "#DEA2FF",
   },
 });
